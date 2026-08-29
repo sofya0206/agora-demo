@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LayoutGrid } from "lucide-react";
 import { RequestCounter } from "./RequestCounter";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   return (
@@ -27,6 +28,7 @@ export function Header() {
             Каталог
           </Link>
           <RequestCounter />
+          <ThemeToggle />
         </nav>
       </div>
     </header>

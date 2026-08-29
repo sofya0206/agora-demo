@@ -54,19 +54,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 pt-8 sm:px-8">
-      <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-white/40">
-        <Link href="/catalog" className="hover:text-white">Каталог</Link>
+      <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+        <Link href="/catalog" className="hover:text-foreground">Каталог</Link>
         <span>›</span>
-        <Link href="/catalog" className="hover:text-white">
+        <Link href="/catalog" className="hover:text-foreground">
           {offer.category.name}
         </Link>
         <span>›</span>
-        <span className="line-clamp-1 text-white/70">{offer.offer_title}</span>
+        <span className="line-clamp-1 text-foreground">{offer.offer_title}</span>
       </nav>
 
-      <section className="grid gap-8 rounded-[36px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-8 lg:grid-cols-5">
+      <section className="grid gap-8 rounded-[36px] border border-border bg-background p-5 backdrop-blur-xl sm:p-8 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <div className="relative aspect-square overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+          <div className="relative aspect-square overflow-hidden rounded-[28px] border border-border bg-muted">
             {offer.photo_url ? (
               <Image
                 src={offer.photo_url}
@@ -77,14 +77,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 priority
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-8xl text-white/20">◫</div>
+              <div className="flex h-full items-center justify-center text-8xl text-muted-foreground">◫</div>
             )}
           </div>
         </div>
 
         <div className="lg:col-span-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">
+            <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs text-secondary-foreground">
               {offer.category.name}
             </span>
             <Badge variant={stockBadgeVariant(offer.stock_status)}>{offer.stock_status}</Badge>
@@ -95,7 +95,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </h1>
           <Link
             href={`/supplier/${offer.supplier.id}`}
-            className="mt-4 inline-flex items-center gap-3 text-white/60 hover:text-white"
+            className="mt-4 inline-flex items-center gap-3 text-muted-foreground hover:text-foreground"
           >
             <SupplierLogo
               name={offer.supplier.commercial_name}
@@ -107,35 +107,35 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </Link>
 
           {offer.description_short && (
-            <p className="mt-6 text-base leading-relaxed text-white/55">{offer.description_short}</p>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">{offer.description_short}</p>
           )}
 
-          <div className="mt-7 rounded-[28px] border border-white/10 bg-black/20 p-6">
+          <div className="mt-7 rounded-[28px] border border-border bg-muted p-6">
             <div className="text-4xl font-black">{formatMoney(offer.price_value, offer.currency)}</div>
-            <div className="mt-1 text-sm text-white/40">за {offer.price_basis} · минимум {offer.moq_value} {offer.price_basis}</div>
+            <div className="mt-1 text-sm text-muted-foreground">за {offer.price_basis} · минимум {offer.moq_value} {offer.price_basis}</div>
             <AddToRequestButton offer={offer} />
           </div>
         </div>
       </section>
 
       <section className="mt-8 grid gap-8 lg:grid-cols-5">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7 lg:col-span-3">
+        <div className="rounded-[32px] border border-border bg-background p-7 lg:col-span-3">
           <h2 className="text-xl font-semibold">Характеристики</h2>
           {specs.length > 0 ? (
-            <dl className="mt-5 divide-y divide-white/10">
+            <dl className="mt-5 divide-y divide-border">
               {specs.map((spec) => (
                 <div key={spec.key} className="grid grid-cols-2 gap-4 py-4 text-sm">
-                  <dt className="text-white/45">{spec.label}</dt>
-                  <dd className="text-right font-medium text-white/85">{spec.value}</dd>
+                  <dt className="text-muted-foreground">{spec.label}</dt>
+                  <dd className="text-right font-medium text-foreground">{spec.value}</dd>
                 </div>
               ))}
             </dl>
           ) : (
-            <p className="mt-4 text-sm text-white/45">Для этого предложения характеристики не заполнены.</p>
+            <p className="mt-4 text-sm text-muted-foreground">Для этого предложения характеристики не заполнены.</p>
           )}
         </div>
 
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7 lg:col-span-2">
+        <div className="rounded-[32px] border border-border bg-background p-7 lg:col-span-2">
           <h2 className="text-xl font-semibold">Условия</h2>
           <dl className="mt-5 space-y-4 text-sm">
             <InfoRow label="Производство" value={formatDays(offer.production_lead_days)} />
@@ -162,8 +162,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-4">
-      <dt className="text-white/40">{label}</dt>
-      <dd className="text-right text-white/80">{value}</dd>
+      <dt className="text-muted-foreground">{label}</dt>
+      <dd className="text-right text-foreground">{value}</dd>
     </div>
   );
 }

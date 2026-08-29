@@ -16,7 +16,7 @@ export function AddToRequestButton({ offer }: AddToRequestButtonProps) {
       type="button"
       onClick={() => toggle(offer)}
       className={`mt-6 w-full rounded-2xl px-6 py-4 text-sm font-semibold transition ${
-        inRequest ? "bg-cyan-400 text-black" : "bg-white text-black hover:bg-cyan-100"
+        inRequest ? "bg-muted-foreground text-background" : "bg-primary text-primary-foreground hover:bg-primary/90"
       }`}
     >
       {inRequest ? "Убрать из заявки" : "Добавить в заявку"}

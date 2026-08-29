@@ -134,19 +134,19 @@ export default function SupplierResultsPage() {
 
   return (
     <div className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.15),transparent_35%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--muted),transparent_35%)]" />
       <div className="relative z-10">
         <section className="mx-auto max-w-6xl px-5 pb-24 pt-12 sm:px-8">
           <div className="flex items-center justify-between gap-4">
-            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">Результаты подбора</div>
-            <Link href="/find-supplier" className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white/70 hover:bg-white/10">
+            <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">Результаты подбора</div>
+            <Link href="/find-supplier" className="rounded-full border border-border bg-muted px-5 py-2 text-sm text-foreground hover:bg-accent">
               Изменить параметры
             </Link>
           </div>
           <h1 className="mt-4 text-4xl font-black tracking-[-0.05em] sm:text-5xl">
             Подходящие поставщики
           </h1>
-          <p className="mt-5 max-w-3xl text-white/50">
+          <p className="mt-5 max-w-3xl text-muted-foreground">
             {selectedNames.length > 0
               ? `Ищем предложения в категориях: ${selectedNames.join(", ")}.`
               : "Сначала выберите хотя бы одну категорию."}
@@ -155,10 +155,10 @@ export default function SupplierResultsPage() {
           {selection && (
             <div className="mt-7 flex flex-wrap gap-2 text-xs">
               {selection.regions.map((region) => (
-                <span key={region} className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-white/60">{region}</span>
+                <span key={region} className="rounded-full border border-border bg-secondary px-3 py-2 text-secondary-foreground">{region}</span>
               ))}
               {selection.maxMoq !== null && (
-                <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-cyan-200">MOQ ≤ {selection.maxMoq}</span>
+                <span className="rounded-full border border-primary bg-muted px-3 py-2 text-foreground">MOQ ≤ {selection.maxMoq}</span>
               )}
             </div>
           )}
@@ -167,22 +167,22 @@ export default function SupplierResultsPage() {
             {loading ? (
               <div className="grid gap-5 md:grid-cols-2">
                 {Array.from({ length: 4 }).map((_, index) => (
-                  <div key={index} className="h-64 animate-pulse rounded-[30px] border border-white/10 bg-white/[0.04]" />
+                  <div key={index} className="h-64 animate-pulse rounded-[30px] border border-border bg-muted" />
                 ))}
               </div>
             ) : error ? (
-              <div className="rounded-[30px] border border-rose-400/20 bg-rose-400/10 p-10 text-center">
+              <div className="rounded-[30px] border border-destructive bg-background p-10 text-center">
                 <h2 className="text-xl font-semibold">Подбор не загрузился</h2>
-                <p className="mt-2 text-white/55">{error}</p>
+                <p className="mt-2 text-muted-foreground">{error}</p>
               </div>
             ) : matches.length === 0 ? (
-              <div className="rounded-[30px] border border-dashed border-white/15 bg-white/[0.03] p-12 text-center">
-                <div className="text-5xl text-white/25">◎</div>
+              <div className="rounded-[30px] border border-dashed border-border bg-background p-12 text-center">
+                <div className="text-5xl text-muted-foreground">◎</div>
                 <h2 className="mt-5 text-2xl font-black">Совпадений пока нет</h2>
-                <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-white/45">
+                <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
                   Ослабьте ограничения или добавьте активных поставщиков и офферы через админ-панель.
                 </p>
-                <Link href="/find-supplier" className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-black">
+                <Link href="/find-supplier" className="mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">
                   Изменить параметры
                 </Link>
               </div>
@@ -193,18 +193,18 @@ export default function SupplierResultsPage() {
                     offer.price_value < current.price_value ? offer : current,
                   );
                   return (
-                    <article key={match.supplier.id} className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 transition hover:border-cyan-400/20 hover:bg-white/[0.06]">
+                    <article key={match.supplier.id} className="rounded-[30px] border border-border bg-background p-7 transition hover:border-primary hover:bg-muted">
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <span className={`rounded-full border px-3 py-1 text-xs ${
                             match.fullMatch
-                              ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-                              : "border-amber-400/20 bg-amber-400/10 text-amber-200"
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border bg-muted text-muted-foreground"
                           }`}>
                             {match.fullMatch ? "Полное совпадение" : "Частичное совпадение"}
                           </span>
                           <h2 className="mt-4 text-2xl font-black">{match.supplier.commercial_name}</h2>
-                          <p className="mt-2 text-sm text-white/45">
+                          <p className="mt-2 text-sm text-muted-foreground">
                             {match.supplier.shipping_cities.join(", ") || "Город отгрузки не указан"}
                           </p>
                         </div>
@@ -217,24 +217,24 @@ export default function SupplierResultsPage() {
 
                       <div className="mt-6 flex flex-wrap gap-2">
                         {match.matchedCategorySlugs.map((slug) => (
-                          <span key={slug} className="rounded-full bg-white/5 px-3 py-1.5 text-xs text-white/55">
+                          <span key={slug} className="rounded-full bg-secondary px-3 py-1.5 text-xs text-secondary-foreground">
                             {PILOT_CATEGORIES.find((category) => category.slug === slug)?.name || slug}
                           </span>
                         ))}
                       </div>
 
-                      <div className="mt-7 grid grid-cols-2 gap-3 border-t border-white/10 pt-5 text-sm">
+                      <div className="mt-7 grid grid-cols-2 gap-3 border-t border-border pt-5 text-sm">
                         <div>
-                          <div className="text-white/35">Подходящих офферов</div>
+                          <div className="text-muted-foreground">Подходящих офферов</div>
                           <div className="mt-1 text-lg font-bold">{match.offers.length}</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-white/35">Цена от</div>
+                          <div className="text-muted-foreground">Цена от</div>
                           <div className="mt-1 text-lg font-bold">{formatMoney(minimum.price_value, minimum.currency)}</div>
                         </div>
                       </div>
 
-                      <Link href={`/supplier/${match.supplier.id}`} className="mt-6 flex w-full items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-cyan-100">
+                      <Link href={`/supplier/${match.supplier.id}`} className="mt-6 flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
                         Открыть поставщика
                       </Link>
                     </article>

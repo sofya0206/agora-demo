@@ -47,7 +47,7 @@ export function CategoryPicker({ categories }: CategoryPickerProps) {
                 key={category.slug}
                 className={cn(
                   "flex cursor-pointer items-center gap-[11px] rounded-lg border border-border px-4 py-[13.5px] text-sm leading-5 text-foreground transition-colors",
-                  checked ? "bg-muted ring-1 ring-primary" : "bg-background hover:bg-muted",
+                  checked ? "border-primary bg-muted" : "bg-background hover:bg-muted",
                 )}
               >
                 <Checkbox
