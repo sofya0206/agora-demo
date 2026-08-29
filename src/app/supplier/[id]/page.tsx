@@ -24,7 +24,9 @@ interface SupplierPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export async function generateMetadata({ params }: SupplierPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: SupplierPageProps): Promise<Metadata> {
   const { id } = await params;
 
   try {
@@ -50,7 +52,10 @@ export async function generateMetadata({ params }: SupplierPageProps): Promise<M
   }
 }
 
-export default async function SupplierPage({ params, searchParams }: SupplierPageProps) {
+export default async function SupplierPage({
+  params,
+  searchParams,
+}: SupplierPageProps) {
   const { id } = await params;
   const { category } = await searchParams;
   const requestedCategory = typeof category === "string" ? category : "";
@@ -71,14 +76,18 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
     }
 
     const message =
-      fetchError instanceof ApiError ? fetchError.message : "Не удалось загрузить поставщика.";
+      fetchError instanceof ApiError
+        ? fetchError.message
+        : "Не удалось загрузить поставщика.";
 
     return (
       <div className="mx-auto w-full max-w-[1440px] px-5 py-20 text-center sm:px-8 xl:px-20">
         <h1 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-[26px]">
           Поставщик не найден
         </h1>
-        <p className="mt-2 text-sm font-medium text-muted-foreground">{message}</p>
+        <p className="mt-2 text-sm font-medium text-muted-foreground">
+          {message}
+        </p>
         <Button asChild size="lg" className="mt-8">
           <Link href="/catalog">Вернуться в каталог</Link>
         </Button>
@@ -86,9 +95,12 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
     );
   }
 
-  const inStockCount = offers.filter((offer) => offer.stock_status === "В наличии").length;
+  const inStockCount = offers.filter(
+    (offer) => offer.stock_status === "В наличии",
+  ).length;
   const minOffer = offers.reduce<Offer | null>(
-    (minimum, offer) => (!minimum || offer.price_value < minimum.price_value ? offer : minimum),
+    (minimum, offer) =>
+      !minimum || offer.price_value < minimum.price_value ? offer : minimum,
     null,
   );
   const categories = Array.from(
@@ -96,7 +108,9 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
       offers.map((offer) => [offer.category.slug, offer.category]),
     ).values(),
   );
-  const activeCategory = categories.some((item) => item.slug === requestedCategory)
+  const activeCategory = categories.some(
+    (item) => item.slug === requestedCategory,
+  )
     ? requestedCategory
     : "";
   const visibleOffers = activeCategory
@@ -114,7 +128,9 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Поставщик {supplier.commercial_name}</BreadcrumbPage>
+            <BreadcrumbPage>
+              Поставщик {supplier.commercial_name}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -130,7 +146,9 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
             />
             <div className="flex flex-col items-start gap-2">
               <div className="flex flex-col gap-1">
-                <p className="text-lg font-medium text-muted-foreground">Поставщик</p>
+                <p className="text-lg font-medium text-muted-foreground">
+                  Поставщик
+                </p>
                 <h1 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-[26px]">
                   {supplier.commercial_name}
                 </h1>
@@ -140,7 +158,10 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
                 <span>ИНН {supplier.inn}</span>
               </p>
               {supplier.shipping_cities.length > 0 && (
-                <Badge variant="secondary" className="h-auto whitespace-normal text-left">
+                <Badge
+                  variant="secondary"
+                  className="h-auto whitespace-normal text-left"
+                >
                   <Car data-icon="inline-start" aria-hidden="true" />
                   Отгрузка: {supplier.shipping_cities.join(", ")}
                 </Badge>
@@ -153,7 +174,11 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
             <Stat label="В наличии" value={String(inStockCount)} />
             <Stat
               label="Цена от"
-              value={minOffer ? formatMoney(minOffer.price_value, minOffer.currency) : "—"}
+              value={
+                minOffer
+                  ? formatMoney(minOffer.price_value, minOffer.currency)
+                  : "—"
+              }
             />
           </dl>
         </section>
@@ -167,12 +192,20 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
             <Contact
               label="Телефон"
               value={supplier.contact.phone}
-              href={supplier.contact.phone ? `tel:${supplier.contact.phone}` : undefined}
+              href={
+                supplier.contact.phone
+                  ? `tel:${supplier.contact.phone}`
+                  : undefined
+              }
             />
             <Contact
               label="Email"
               value={supplier.contact.email}
-              href={supplier.contact.email ? `mailto:${supplier.contact.email}` : undefined}
+              href={
+                supplier.contact.email
+                  ? `mailto:${supplier.contact.email}`
+                  : undefined
+              }
             />
             <Contact label="Telegram" value={supplier.contact.telegram} />
             <Contact label="Юридический адрес" value={supplier.legal_address} />
@@ -187,7 +220,9 @@ export default async function SupplierPage({ params, searchParams }: SupplierPag
 
         <section className="flex flex-col gap-4 pt-4">
           <div className="flex flex-col gap-2">
-            <p className="text-lg font-medium text-muted-foreground">Ассортимент</p>
+            <p className="text-lg font-medium text-muted-foreground">
+              Ассортимент
+            </p>
             <h2 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-[26px]">
               Предложения поставщика
             </h2>

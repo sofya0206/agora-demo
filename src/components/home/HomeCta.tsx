@@ -11,8 +11,8 @@ export function HomeCta() {
         Начните поиск поставщиков за 5 минут
       </h2>
       <p className="max-w-[540px] leading-5 text-primary-foreground/80 lg:text-[17px]">
-        Присоединяйтесь к 500+ компаниям, которые уже находят надёжных поставщиков упаковки через
-        Агору.
+        Присоединяйтесь к 500+ компаниям, которые уже находят надёжных
+        поставщиков упаковки через Агору.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3 pt-[17px]">
         <Button asChild variant="secondary" className="h-10 px-6">

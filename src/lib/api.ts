@@ -1,9 +1,4 @@
-import type {
-  Category,
-  Offer,
-  Paginated,
-  Supplier,
-} from "@/types";
+import type { Category, Offer, Paginated, Supplier } from "@/types";
 
 export const DEFAULT_API_URL = "https://agora.178.88.115.213.sslip.io/api";
 
@@ -90,7 +85,11 @@ export interface OffersQuery {
   page?: number;
 }
 
-export function getOffers(query: OffersQuery = {}, signal?: AbortSignal, revalidate?: number) {
+export function getOffers(
+  query: OffersQuery = {},
+  signal?: AbortSignal,
+  revalidate?: number,
+) {
   return getJson<Paginated<Offer>>(
     "/offers",
     query as Record<string, QueryValue>,

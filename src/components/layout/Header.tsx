@@ -12,14 +12,19 @@ export function Header() {
             А
           </span>
           <span className="flex flex-col">
-            <span className="text-lg font-bold tracking-tight text-foreground">Агора</span>
+            <span className="text-lg font-bold tracking-tight text-foreground">
+              Агора
+            </span>
             <span className="hidden text-xs text-muted-foreground sm:block">
               B2B-платформа упаковки
             </span>
           </span>
         </Link>
 
-        <nav className="ml-auto flex items-center gap-2.5" aria-label="Основная навигация">
+        <nav
+          className="ml-auto flex items-center gap-2.5"
+          aria-label="Основная навигация"
+        >
           <Link
             href="/catalog"
             className="inline-flex h-9 items-center gap-2 rounded-[10px] px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted"

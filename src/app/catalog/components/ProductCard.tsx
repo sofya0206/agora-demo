@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Car, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { formatDays, formatMoney, formatVat, stockBadgeVariant } from "@/lib/catalog";
+import {
+  formatDays,
+  formatMoney,
+  formatVat,
+  stockBadgeVariant,
+} from "@/lib/catalog";
 import type { Offer } from "@/types";
 import { AddToRequestControl } from "./AddToRequestControl";
 
@@ -28,7 +33,9 @@ export function ProductCard({ offer }: ProductCardProps) {
           </div>
         )}
         <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
-          <Badge variant={stockBadgeVariant(offer.stock_status)}>{offer.stock_status}</Badge>
+          <Badge variant={stockBadgeVariant(offer.stock_status)}>
+            {offer.stock_status}
+          </Badge>
           <Badge variant="secondary">MOQ {offer.moq_value}</Badge>
         </div>
       </div>
@@ -36,7 +43,10 @@ export function ProductCard({ offer }: ProductCardProps) {
       <div className="flex flex-1 flex-col gap-3 p-3">
         <div className="flex flex-col gap-1">
           <h3 className="text-base font-semibold text-foreground">
-            <Link href={`/product/${offer.id}`} className="line-clamp-2 hover:underline">
+            <Link
+              href={`/product/${offer.id}`}
+              className="line-clamp-2 hover:underline"
+            >
               {offer.offer_title}
             </Link>
           </h3>

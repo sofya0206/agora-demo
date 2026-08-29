@@ -18,7 +18,13 @@ interface CatalogPaginationProps {
 type PageSlot = { kind: "page"; page: number } | { kind: "gap"; page: number };
 
 function pageSlots(currentPage: number, totalPages: number): PageSlot[] {
-  const shown = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  const shown = new Set([
+    1,
+    totalPages,
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+  ]);
   if (currentPage <= 3) [2, 3].forEach((page) => shown.add(page));
   if (currentPage >= totalPages - 2)
     [totalPages - 1, totalPages - 2].forEach((page) => shown.add(page));
@@ -37,7 +43,11 @@ function pageSlots(currentPage: number, totalPages: number): PageSlot[] {
   );
 }
 
-export function CatalogPagination({ filters, currentPage, totalPages }: CatalogPaginationProps) {
+export function CatalogPagination({
+  filters,
+  currentPage,
+  totalPages,
+}: CatalogPaginationProps) {
   if (totalPages <= 1) return null;
 
   const hrefFor = (page: number) => {
@@ -51,12 +61,20 @@ export function CatalogPagination({ filters, currentPage, totalPages }: CatalogP
         <PaginationItem>
           {currentPage > 1 ? (
             <Button asChild variant="secondary">
-              <Link href={hrefFor(currentPage - 1)} scroll={false} aria-label="Предыдущая страница">
+              <Link
+                href={hrefFor(currentPage - 1)}
+                scroll={false}
+                aria-label="Предыдущая страница"
+              >
                 Назад
               </Link>
             </Button>
           ) : (
-            <Button variant="secondary" disabled aria-label="Предыдущая страница">
+            <Button
+              variant="secondary"
+              disabled
+              aria-label="Предыдущая страница"
+            >
               Назад
             </Button>
           )}
@@ -91,12 +109,20 @@ export function CatalogPagination({ filters, currentPage, totalPages }: CatalogP
         <PaginationItem>
           {currentPage < totalPages ? (
             <Button asChild variant="secondary">
-              <Link href={hrefFor(currentPage + 1)} scroll={false} aria-label="Следующая страница">
+              <Link
+                href={hrefFor(currentPage + 1)}
+                scroll={false}
+                aria-label="Следующая страница"
+              >
                 Вперёд
               </Link>
             </Button>
           ) : (
-            <Button variant="secondary" disabled aria-label="Следующая страница">
+            <Button
+              variant="secondary"
+              disabled
+              aria-label="Следующая страница"
+            >
               Вперёд
             </Button>
           )}

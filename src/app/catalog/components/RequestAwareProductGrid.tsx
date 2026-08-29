@@ -5,6 +5,8 @@ interface RequestAwareProductGridProps {
   offers: Offer[];
 }
 
-export function RequestAwareProductGrid({ offers }: RequestAwareProductGridProps) {
+export function RequestAwareProductGrid({
+  offers,
+}: RequestAwareProductGridProps) {
   return <ProductGrid offers={offers} />;
 }

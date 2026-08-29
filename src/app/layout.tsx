@@ -8,7 +8,10 @@ import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-sans" });
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Агора — B2B-каталог транспортной упаковки",
@@ -28,7 +31,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className="flex min-h-screen flex-col bg-background text-foreground">
             <Header />
             <main className="flex-1">{children}</main>

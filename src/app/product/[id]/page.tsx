@@ -6,14 +6,21 @@ import { RequestAwareProductGrid } from "@/app/catalog/components/RequestAwarePr
 import { SupplierLogo } from "@/components/SupplierLogo";
 import { Badge } from "@/components/ui/badge";
 import { ApiError, getOffer, getOffers } from "@/lib/api";
-import { formatDays, formatMoney, getSpecEntries, stockBadgeVariant } from "@/lib/catalog";
+import {
+  formatDays,
+  formatMoney,
+  getSpecEntries,
+  stockBadgeVariant,
+} from "@/lib/catalog";
 import { AddToRequestButton } from "./AddToRequestButton";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
   const { id } = await params;
 
   try {
@@ -46,8 +53,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     throw fetchError;
   }
 
-  const related = await getOffers({ category: offer.category.slug, per_page: 4 })
-    .then((page) => page.data.filter((item) => item.id !== offer.id).slice(0, 3))
+  const related = await getOffers({
+    category: offer.category.slug,
+    per_page: 4,
+  })
+    .then((page) =>
+      page.data.filter((item) => item.id !== offer.id).slice(0, 3),
+    )
     .catch(() => []);
 
   const specs = getSpecEntries(offer);
@@ -55,13 +67,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="mx-auto max-w-6xl px-5 pb-24 pt-8 sm:px-8">
       <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/catalog" className="hover:text-foreground">Каталог</Link>
+        <Link href="/catalog" className="hover:text-foreground">
+          Каталог
+        </Link>
         <span>›</span>
         <Link href="/catalog" className="hover:text-foreground">
           {offer.category.name}
         </Link>
         <span>›</span>
-        <span className="line-clamp-1 text-foreground">{offer.offer_title}</span>
+        <span className="line-clamp-1 text-foreground">
+          {offer.offer_title}
+        </span>
       </nav>
 
       <section className="grid gap-8 rounded-[36px] border border-border bg-background p-5 backdrop-blur-xl sm:p-8 lg:grid-cols-5">
@@ -77,7 +93,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 priority
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-8xl text-muted-foreground">◫</div>
+              <div className="flex h-full items-center justify-center text-8xl text-muted-foreground">
+                ◫
+              </div>
             )}
           </div>
         </div>
@@ -87,7 +105,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs text-secondary-foreground">
               {offer.category.name}
             </span>
-            <Badge variant={stockBadgeVariant(offer.stock_status)}>{offer.stock_status}</Badge>
+            <Badge variant={stockBadgeVariant(offer.stock_status)}>
+              {offer.stock_status}
+            </Badge>
           </div>
 
           <h1 className="mt-5 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-4xl">
@@ -107,12 +127,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </Link>
 
           {offer.description_short && (
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">{offer.description_short}</p>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              {offer.description_short}
+            </p>
           )}
 
           <div className="mt-7 rounded-[28px] border border-border bg-muted p-6">
-            <div className="text-4xl font-black">{formatMoney(offer.price_value, offer.currency)}</div>
-            <div className="mt-1 text-sm text-muted-foreground">за {offer.price_basis} · минимум {offer.moq_value} {offer.price_basis}</div>
+            <div className="text-4xl font-black">
+              {formatMoney(offer.price_value, offer.currency)}
+            </div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              за {offer.price_basis} · минимум {offer.moq_value}{" "}
+              {offer.price_basis}
+            </div>
             <AddToRequestButton offer={offer} />
           </div>
         </div>
@@ -124,27 +151,56 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {specs.length > 0 ? (
             <dl className="mt-5 divide-y divide-border">
               {specs.map((spec) => (
-                <div key={spec.key} className="grid grid-cols-2 gap-4 py-4 text-sm">
+                <div
+                  key={spec.key}
+                  className="grid grid-cols-2 gap-4 py-4 text-sm"
+                >
                   <dt className="text-muted-foreground">{spec.label}</dt>
-                  <dd className="text-right font-medium text-foreground">{spec.value}</dd>
+                  <dd className="text-right font-medium text-foreground">
+                    {spec.value}
+                  </dd>
                 </div>
               ))}
             </dl>
           ) : (
-            <p className="mt-4 text-sm text-muted-foreground">Для этого предложения характеристики не заполнены.</p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Для этого предложения характеристики не заполнены.
+            </p>
           )}
         </div>
 
         <div className="rounded-[32px] border border-border bg-background p-7 lg:col-span-2">
           <h2 className="text-xl font-semibold">Условия</h2>
           <dl className="mt-5 space-y-4 text-sm">
-            <InfoRow label="Производство" value={formatDays(offer.production_lead_days)} />
-            <InfoRow label="Доставка" value={formatDays(offer.delivery_lead_days)} />
+            <InfoRow
+              label="Производство"
+              value={formatDays(offer.production_lead_days)}
+            />
+            <InfoRow
+              label="Доставка"
+              value={formatDays(offer.delivery_lead_days)}
+            />
             <InfoRow label="Оплата" value={offer.payment_terms} />
-            <InfoRow label="НДС" value={offer.vat_rate === "Без НДС" ? offer.vat_rate : `${offer.vat_rate}%`} />
-            <InfoRow label="Самовывоз" value={offer.pickup_available ? "Доступен" : "Нет"} />
-            <InfoRow label="Брендирование" value={offer.branding_available ? "Доступно" : "Нет"} />
-            <InfoRow label="Регионы" value={offer.delivery_regions.join(", ") || "По согласованию"} />
+            <InfoRow
+              label="НДС"
+              value={
+                offer.vat_rate === "Без НДС"
+                  ? offer.vat_rate
+                  : `${offer.vat_rate}%`
+              }
+            />
+            <InfoRow
+              label="Самовывоз"
+              value={offer.pickup_available ? "Доступен" : "Нет"}
+            />
+            <InfoRow
+              label="Брендирование"
+              value={offer.branding_available ? "Доступно" : "Нет"}
+            />
+            <InfoRow
+              label="Регионы"
+              value={offer.delivery_regions.join(", ") || "По согласованию"}
+            />
           </dl>
         </div>
       </section>

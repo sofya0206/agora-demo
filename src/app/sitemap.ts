@@ -5,7 +5,11 @@ import { SITE_URL } from "@/lib/site";
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
   { url: `${SITE_URL}/catalog`, changeFrequency: "daily", priority: 0.9 },
-  { url: `${SITE_URL}/find-supplier`, changeFrequency: "monthly", priority: 0.6 },
+  {
+    url: `${SITE_URL}/find-supplier`,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

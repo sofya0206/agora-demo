@@ -33,11 +33,15 @@ export function CategoryPicker({ categories }: CategoryPickerProps) {
   return (
     <div className="w-full max-w-[900px] rounded-xl border border-border bg-background shadow-sm">
       <div className="flex flex-col gap-1 px-5 py-7 sm:px-[30px]">
-        <p className="text-xs font-semibold text-muted-foreground">Шаг 1 из 3</p>
+        <p className="text-xs font-semibold text-muted-foreground">
+          Шаг 1 из 3
+        </p>
         <h3 className="pt-1 text-[22px] leading-5 font-bold tracking-[-0.01em] text-foreground">
           Какая упаковка нужна?
         </h3>
-        <p className="text-sm text-muted-foreground">Можно выбрать несколько категорий.</p>
+        <p className="text-sm text-muted-foreground">
+          Можно выбрать несколько категорий.
+        </p>
 
         <div className="grid grid-cols-1 gap-3 pt-4 pb-[18px] sm:grid-cols-2">
           {categories.map((category) => {
@@ -47,13 +51,17 @@ export function CategoryPicker({ categories }: CategoryPickerProps) {
                 key={category.slug}
                 className={cn(
                   "flex cursor-pointer items-center gap-[11px] rounded-lg border border-border px-4 py-[13.5px] text-sm leading-5 text-foreground transition-colors",
-                  checked ? "border-primary bg-muted" : "bg-background hover:bg-muted",
+                  checked
+                    ? "border-primary bg-muted"
+                    : "bg-background hover:bg-muted",
                 )}
               >
                 <Checkbox
                   className="rounded-full"
                   checked={checked}
-                  onCheckedChange={(value) => toggle(category.slug, value === true)}
+                  onCheckedChange={(value) =>
+                    toggle(category.slug, value === true)
+                  }
                 />
                 {category.name}
               </label>

@@ -9,8 +9,12 @@ export function Footer() {
             А
           </span>
           <span className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-muted-foreground">Агора</span>
-            <span className="text-sm text-muted-foreground">B2B-платформа упаковки</span>
+            <span className="text-sm font-bold tracking-tight text-muted-foreground">
+              Агора
+            </span>
+            <span className="text-sm text-muted-foreground">
+              B2B-платформа упаковки
+            </span>
           </span>
         </Link>
 
