@@ -11,8 +11,8 @@ export function HomeCta() {
         Начните поиск поставщиков за 5 минут
       </h2>
       <p className="max-w-[540px] leading-5 text-primary-foreground/80 lg:text-[17px]">
-        Присоединяйтесь к 500+ компаниям, которые уже находят надёжных поставщиков упаковки через
-        Агору.
+        Присоединяйтесь к 500+ компаниям, которые уже находят надёжных
+        поставщиков упаковки через Агору.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3 pt-[17px]">
         <Button asChild variant="secondary" className="h-10 px-6">
@@ -21,7 +21,7 @@ export function HomeCta() {
         <Button
           asChild
           variant="outline"
-          className="h-10 border-0 bg-transparent px-6 text-primary-foreground ring-1 ring-primary-foreground/45 hover:bg-primary-foreground/10 hover:text-primary-foreground dark:bg-transparent dark:hover:bg-primary-foreground/10"
+          className="h-10 border-primary-foreground/45 bg-transparent px-6 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground dark:border-primary-foreground/45 dark:bg-transparent dark:hover:bg-primary-foreground/10"
         >
           <Link href="/catalog">Смотреть каталог</Link>
         </Button>

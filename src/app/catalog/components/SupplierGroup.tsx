@@ -24,7 +24,10 @@ export function SupplierGroup({
   const hasMore = !expanded && total > offers.length;
 
   return (
-    <section className="flex flex-col items-center gap-4" aria-labelledby={`supplier-${supplier.id}`}>
+    <section
+      className="flex flex-col items-center gap-4"
+      aria-labelledby={`supplier-${supplier.id}`}
+    >
       <div className="flex w-full flex-wrap items-center gap-2">
         <SupplierLogo
           name={supplier.commercial_name}

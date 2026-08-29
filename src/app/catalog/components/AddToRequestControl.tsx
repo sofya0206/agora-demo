@@ -45,7 +45,8 @@ export function AddToRequestControl({ offer }: AddToRequestControlProps) {
         value={quantity}
         onChange={(event) => {
           const next = Number(event.target.value);
-          if (Number.isFinite(next)) setQuantity(offer.id, Math.max(step, Math.round(next)));
+          if (Number.isFinite(next))
+            setQuantity(offer.id, Math.max(step, Math.round(next)));
         }}
         aria-label={`Количество, ${offer.price_basis}`}
         className="h-9 w-16 px-2 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"

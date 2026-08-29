@@ -1,8 +1,5 @@
 export type StockStatus =
-  | "В наличии"
-  | "Под заказ"
-  | "Нет в наличии"
-  | "Ожидается";
+  "В наличии" | "Под заказ" | "Нет в наличии" | "Ожидается";
 
 export type Currency = "RUB" | "CNY" | "USD" | "EUR" | string;
 

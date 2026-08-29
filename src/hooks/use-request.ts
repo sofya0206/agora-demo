@@ -60,7 +60,11 @@ function save(items: RequestItem[]) {
 }
 
 export function useRequest() {
-  const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => EMPTY_SNAPSHOT);
+  const snapshot = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    () => EMPTY_SNAPSHOT,
+  );
   const items = useMemo(() => {
     try {
       return JSON.parse(snapshot) as RequestItem[];
@@ -68,7 +72,10 @@ export function useRequest() {
       return [];
     }
   }, [snapshot]);
-  const ids = useMemo(() => new Set(items.map((item) => item.offerId)), [items]);
+  const ids = useMemo(
+    () => new Set(items.map((item) => item.offerId)),
+    [items],
+  );
 
   const toggle = useCallback((offer: Offer) => {
     const current = readItems();
@@ -90,7 +97,9 @@ export function useRequest() {
     const current = readItems();
     save(
       current.map((item) =>
-        item.offerId === offerId ? { ...item, quantity: Math.max(1, quantity) } : item,
+        item.offerId === offerId
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item,
       ),
     );
   }, []);

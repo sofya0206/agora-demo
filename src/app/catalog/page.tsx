@@ -18,14 +18,18 @@ interface CatalogPageProps {
   searchParams: Promise<RawSearchParams>;
 }
 
-export async function generateMetadata({ searchParams }: CatalogPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  searchParams,
+}: CatalogPageProps): Promise<Metadata> {
   const filters = readCatalogFilters(await searchParams);
   const category = filters.category
     ? PILOT_CATEGORIES.find((item) => item.slug === filters.category)
     : undefined;
 
   return {
-    title: category ? `${category.name} — каталог Агоры` : "Каталог предложений — Агора",
+    title: category
+      ? `${category.name} — каталог Агоры`
+      : "Каталог предложений — Агора",
     description:
       "Сравнивайте предложения поставщиков транспортной упаковки по цене, наличию и условиям поставки в каталоге Агоры.",
   };
@@ -40,7 +44,8 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   ]);
 
   const categories: Category[] =
-    categoriesResult.status === "fulfilled" && categoriesResult.value.data.length > 0
+    categoriesResult.status === "fulfilled" &&
+    categoriesResult.value.data.length > 0
       ? categoriesResult.value.data
       : PILOT_CATEGORIES;
   const suppliers: Supplier[] =
@@ -56,7 +61,9 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   return (
     <div className="mx-auto w-full max-w-[1440px] px-5 pb-20 sm:px-8 xl:px-20">
       <section className="flex flex-col gap-4 py-4">
-        <p className="text-lg font-medium text-muted-foreground">Каталог предложений</p>
+        <p className="text-lg font-medium text-muted-foreground">
+          Каталог предложений
+        </p>
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-[26px]">
             Сравнивайте упаковку по цене и условиям поставки

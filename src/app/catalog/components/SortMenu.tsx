@@ -15,7 +15,9 @@ import { useCatalogFilters } from "./use-catalog-url";
 
 export function SortMenu() {
   const { filters, setFilters } = useCatalogFilters();
-  const current = SORT_OPTIONS.find((option) => option.value === filters.sort) ?? SORT_OPTIONS[0];
+  const current =
+    SORT_OPTIONS.find((option) => option.value === filters.sort) ??
+    SORT_OPTIONS[0];
 
   return (
     <DropdownMenu>

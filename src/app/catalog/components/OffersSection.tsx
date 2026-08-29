@@ -69,10 +69,14 @@ async function loadGroups(filters: CatalogFilters, suppliers: Supplier[]) {
     : selected.map((supplier) => ({ supplier, total: null }));
 
   const overallPromise = filtered
-    ? Promise.resolve(counted.reduce((sum, entry) => sum + (entry.total ?? 0), 0))
-    : getOffers({ ...query, per_page: 1 }, undefined, COUNT_REVALIDATE_SECONDS).then(
-        (page) => page.meta.total,
-      );
+    ? Promise.resolve(
+        counted.reduce((sum, entry) => sum + (entry.total ?? 0), 0),
+      )
+    : getOffers(
+        { ...query, per_page: 1 },
+        undefined,
+        COUNT_REVALIDATE_SECONDS,
+      ).then((page) => page.meta.total);
 
   const totalPages = Math.max(1, Math.ceil(counted.length / GROUPS_PER_PAGE));
   const currentPage = Math.min(filters.page, totalPages);
@@ -83,7 +87,8 @@ async function loadGroups(filters: CatalogFilters, suppliers: Supplier[]) {
     counted.slice(pageStart, pageStart + GROUPS_PER_PAGE).map(async (entry) => {
       // Полную выборку тянем только когда она нужна: раскрытая группа или сортировка,
       // которой у API нет. В остальных случаях хватает офферов на превью.
-      const full = expanded.has(entry.supplier.id) || filters.sort !== "price_asc";
+      const full =
+        expanded.has(entry.supplier.id) || filters.sort !== "price_asc";
       const page = await getOffers({
         ...query,
         supplier_id: entry.supplier.id,
@@ -93,7 +98,9 @@ async function loadGroups(filters: CatalogFilters, suppliers: Supplier[]) {
 
       return {
         supplier: toOfferSupplier(entry.supplier),
-        offers: expanded.has(entry.supplier.id) ? sorted : sorted.slice(0, GROUP_PREVIEW_SIZE),
+        offers: expanded.has(entry.supplier.id)
+          ? sorted
+          : sorted.slice(0, GROUP_PREVIEW_SIZE),
         total: page.meta.total,
       };
     }),
@@ -106,7 +113,10 @@ async function loadGroups(filters: CatalogFilters, suppliers: Supplier[]) {
   return { groups, totalOffers: overall, totalPages, currentPage };
 }
 
-export async function OffersSection({ filters, suppliers }: OffersSectionProps) {
+export async function OffersSection({
+  filters,
+  suppliers,
+}: OffersSectionProps) {
   let result: Awaited<ReturnType<typeof loadGroups>> | null = null;
   let errorMessage: string | null = null;
 
@@ -122,7 +132,9 @@ export async function OffersSection({ filters, suppliers }: OffersSectionProps) 
   if (!result) {
     return (
       <div className="rounded-2xl border border-border bg-background p-10 text-center shadow-xs">
-        <h2 className="text-lg font-semibold text-foreground">Каталог не загрузился</h2>
+        <h2 className="text-lg font-semibold text-foreground">
+          Каталог не загрузился
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">{errorMessage}</p>
         <RetryButton />
       </div>
@@ -146,17 +158,25 @@ export async function OffersSection({ filters, suppliers }: OffersSectionProps) 
       <div className="flex flex-wrap items-center gap-2">
         <p className="flex-1 text-base font-medium text-muted-foreground">
           Найдено:{" "}
-          <strong className="font-semibold text-foreground">{pluralResults(totalOffers)}</strong>
+          <strong className="font-semibold text-foreground">
+            {pluralResults(totalOffers)}
+          </strong>
         </p>
         <SortMenu />
       </div>
 
       {groups.length === 0 ? (
         <div className="flex flex-col items-center rounded-2xl border border-border bg-background p-12 text-center shadow-xs">
-          <PackageOpen className="size-10 text-muted-foreground" aria-hidden="true" />
-          <h2 className="mt-4 text-lg font-semibold text-foreground">Предложений пока нет</h2>
+          <PackageOpen
+            className="size-10 text-muted-foreground"
+            aria-hidden="true"
+          />
+          <h2 className="mt-4 text-lg font-semibold text-foreground">
+            Предложений пока нет
+          </h2>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">
-            Измените фильтры или сбросьте их — по текущему запросу поставщики ничего не предлагают.
+            Измените фильтры или сбросьте их — по текущему запросу поставщики
+            ничего не предлагают.
           </p>
         </div>
       ) : (

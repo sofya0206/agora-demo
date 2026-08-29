@@ -23,7 +23,10 @@ interface CatalogFiltersProps {
 
 const ANY = "all";
 
-export function CatalogFilterFields({ categories, suppliers }: CatalogFiltersProps) {
+export function CatalogFilterFields({
+  categories,
+  suppliers,
+}: CatalogFiltersProps) {
   const { filters, setFilters } = useCatalogFilters();
   const fieldId = useId();
 
@@ -34,7 +37,10 @@ export function CatalogFilterFields({ categories, suppliers }: CatalogFiltersPro
       placeholder: "Все",
       value: filters.category,
       onChange: (value: string) => setFilters({ category: value }),
-      options: categories.map((category) => ({ value: category.slug, label: category.name })),
+      options: categories.map((category) => ({
+        value: category.slug,
+        label: category.name,
+      })),
     },
     {
       key: "supplier",
@@ -53,7 +59,10 @@ export function CatalogFilterFields({ categories, suppliers }: CatalogFiltersPro
       placeholder: "Все",
       value: filters.region,
       onChange: (value: string) => setFilters({ region: value }),
-      options: PILOT_REGIONS.map((region) => ({ value: region, label: region })),
+      options: PILOT_REGIONS.map((region) => ({
+        value: region,
+        label: region,
+      })),
     },
     {
       key: "stock",
@@ -61,7 +70,10 @@ export function CatalogFilterFields({ categories, suppliers }: CatalogFiltersPro
       placeholder: "Любой статус",
       value: filters.stockStatus,
       onChange: (value: string) => setFilters({ stockStatus: value }),
-      options: STOCK_STATUSES.map((status) => ({ value: status, label: status })),
+      options: STOCK_STATUSES.map((status) => ({
+        value: status,
+        label: status,
+      })),
     },
   ];
 
@@ -72,9 +84,14 @@ export function CatalogFilterFields({ categories, suppliers }: CatalogFiltersPro
           <Label htmlFor={`${fieldId}-${field.key}`}>{field.label}</Label>
           <Select
             value={field.value || ANY}
-            onValueChange={(value) => field.onChange(value === ANY ? "" : value)}
+            onValueChange={(value) =>
+              field.onChange(value === ANY ? "" : value)
+            }
           >
-            <SelectTrigger id={`${fieldId}-${field.key}`} className="min-h-9 w-full">
+            <SelectTrigger
+              id={`${fieldId}-${field.key}`}
+              className="min-h-9 w-full"
+            >
               <SelectValue placeholder={field.placeholder} />
             </SelectTrigger>
             <SelectContent>
@@ -108,12 +125,17 @@ export function CatalogFiltersReset({ className }: { className?: string }) {
   );
 }
 
-export function CatalogFiltersSidebar({ categories, suppliers }: CatalogFiltersProps) {
+export function CatalogFiltersSidebar({
+  categories,
+  suppliers,
+}: CatalogFiltersProps) {
   return (
     <aside className="hidden h-fit w-[302px] shrink-0 lg:sticky lg:top-24 lg:block">
       <div className="flex flex-col gap-4 rounded-2xl border border-border bg-background p-4 shadow-xs">
         <div className="flex items-center gap-4">
-          <h2 className="flex-1 text-lg font-semibold text-foreground">Фильтры</h2>
+          <h2 className="flex-1 text-lg font-semibold text-foreground">
+            Фильтры
+          </h2>
           <CatalogFiltersReset />
         </div>
         <CatalogFilterFields categories={categories} suppliers={suppliers} />

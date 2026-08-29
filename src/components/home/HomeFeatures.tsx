@@ -20,9 +20,17 @@ const FEATURES = [
 ];
 
 const NUMBERS = [
-  { value: "99.9%", label: "Время работы", caption: "Корпоративная надёжность" },
+  {
+    value: "99.9%",
+    label: "Время работы",
+    caption: "Корпоративная надёжность",
+  },
   { value: "< 2 ч", label: "Среднее время ответа", caption: "От поставщиков" },
-  { value: "50 000+", label: "Обработанных заявок", caption: "И это только начало" },
+  {
+    value: "50 000+",
+    label: "Обработанных заявок",
+    caption: "И это только начало",
+  },
 ];
 
 export function HomeFeatures() {
@@ -43,10 +51,17 @@ export function HomeFeatures() {
             className="flex flex-col rounded-xl border border-border bg-background px-[26px] pt-[28px] pb-[27px] shadow-sm"
           >
             <span className="flex size-[50px] items-center justify-center rounded-lg border border-border bg-muted">
-              <Icon className="size-[22px] text-foreground" aria-hidden="true" />
+              <Icon
+                className="size-[22px] text-foreground"
+                aria-hidden="true"
+              />
             </span>
-            <h3 className="mt-[18px] text-[19px] leading-5 font-bold text-foreground">{title}</h3>
-            <p className="mt-[9px] text-sm leading-[22.48px] text-muted-foreground">{text}</p>
+            <h3 className="mt-[18px] text-[19px] leading-5 font-bold text-foreground">
+              {title}
+            </h3>
+            <p className="mt-[9px] text-sm leading-[22.48px] text-muted-foreground">
+              {text}
+            </p>
           </article>
         ))}
       </div>
@@ -60,7 +75,9 @@ export function HomeFeatures() {
             <p className="font-mono text-[34px] leading-[1.05] font-extrabold lg:text-[42px] tracking-[-0.036em] text-foreground">
               {value}
             </p>
-            <p className="pt-1.5 text-sm font-semibold text-foreground">{label}</p>
+            <p className="pt-1.5 text-sm font-semibold text-foreground">
+              {label}
+            </p>
             <p className="pt-1 text-[13px] text-muted-foreground">{caption}</p>
           </div>
         ))}

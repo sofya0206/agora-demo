@@ -66,7 +66,8 @@ export function writeCatalogFilters(filters: CatalogFilters) {
   assign("stock_status", filters.stockStatus);
   if (filters.sort !== "price_asc") params.set("sort", filters.sort);
   if (filters.page > 1) params.set("page", String(filters.page));
-  if (filters.expanded.length > 0) params.set("expand", filters.expanded.join(","));
+  if (filters.expanded.length > 0)
+    params.set("expand", filters.expanded.join(","));
 
   return params.toString();
 }
@@ -80,7 +81,9 @@ export function applyFilterPatch(
   patch: Partial<CatalogFilters>,
 ): CatalogFilters {
   const next = { ...filters, ...patch };
-  const touchesQuery = Object.keys(patch).some((key) => key !== "page" && key !== "expanded");
+  const touchesQuery = Object.keys(patch).some(
+    (key) => key !== "page" && key !== "expanded",
+  );
 
   if (touchesQuery) {
     next.page = patch.page ?? 1;
@@ -105,7 +108,9 @@ export function sortOffers(offers: Offer[], sort: CatalogSort) {
   const price = (offer: Offer) => offer.price_value ?? Number.POSITIVE_INFINITY;
 
   return [...offers].sort((first, second) =>
-    sort === "price_desc" ? price(second) - price(first) : price(first) - price(second),
+    sort === "price_desc"
+      ? price(second) - price(first)
+      : price(first) - price(second),
   );
 }
 
@@ -114,7 +119,8 @@ export function pluralOffers(count: number) {
   const teen = count % 100;
 
   if (tail === 1 && teen !== 11) return `${count} оффер`;
-  if (tail >= 2 && tail <= 4 && (teen < 10 || teen >= 20)) return `${count} оффера`;
+  if (tail >= 2 && tail <= 4 && (teen < 10 || teen >= 20))
+    return `${count} оффера`;
   return `${count} офферов`;
 }
 
@@ -123,6 +129,7 @@ export function pluralResults(count: number) {
   const teen = count % 100;
 
   if (tail === 1 && teen !== 11) return `${count} предложение`;
-  if (tail >= 2 && tail <= 4 && (teen < 10 || teen >= 20)) return `${count} предложения`;
+  if (tail >= 2 && tail <= 4 && (teen < 10 || teen >= 20))
+    return `${count} предложения`;
   return `${count} предложений`;
 }

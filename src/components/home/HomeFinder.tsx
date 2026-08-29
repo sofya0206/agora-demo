@@ -15,15 +15,17 @@ export function HomeFinder() {
           Найдём поставщиков под вашу задачу
         </h2>
         <p className="max-w-[560px] text-base leading-5 text-muted-foreground">
-          Результат рассчитывается по активным офферам: категориям, регионам доставки и минимальной
-          партии.
+          Результат рассчитывается по активным офферам: категориям, регионам
+          доставки и минимальной партии.
         </p>
       </div>
 
       <ol className="flex w-full max-w-[520px] items-center pt-2">
         {STEPS.map((step, index) => (
           <Fragment key={step}>
-            {index > 0 && <li aria-hidden="true" className="h-0.5 flex-1 bg-border" />}
+            {index > 0 && (
+              <li aria-hidden="true" className="h-0.5 flex-1 bg-border" />
+            )}
             <li
               aria-current={step === 1 ? "step" : undefined}
               className={cn(

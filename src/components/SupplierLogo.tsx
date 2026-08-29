@@ -24,7 +24,13 @@ export function SupplierLogo({
       )}
     >
       {logoUrl ? (
-        <Image src={logoUrl} alt="" fill sizes={sizes} className="object-contain p-1" />
+        <Image
+          src={logoUrl}
+          alt=""
+          fill
+          sizes={sizes}
+          className="object-contain p-1"
+        />
       ) : (
         <span aria-hidden="true">{initial}</span>
       )}

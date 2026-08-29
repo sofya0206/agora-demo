@@ -3,7 +3,11 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import type { CatalogFilters } from "@/types";
-import { applyFilterPatch, readCatalogFilters, writeCatalogFilters } from "../catalog-params";
+import {
+  applyFilterPatch,
+  readCatalogFilters,
+  writeCatalogFilters,
+} from "../catalog-params";
 
 export function useCatalogFilters() {
   const router = useRouter();

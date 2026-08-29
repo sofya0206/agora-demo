@@ -15,7 +15,8 @@ export function HomeHero() {
       </h1>
 
       <p className="mt-[22px] mb-8 max-w-[520px] text-lg leading-5 text-muted-foreground lg:text-[19px]">
-        B2B-сервис, соединяющий вас с проверенными производителями транспортной упаковки.
+        B2B-сервис, соединяющий вас с проверенными производителями транспортной
+        упаковки.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-3">
