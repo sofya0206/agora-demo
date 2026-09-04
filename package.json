@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test .next/test-dist/tests/*.test.js",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
