@@ -104,10 +104,62 @@ export interface RequestItem {
   title: string;
   supplierId: number;
   supplierName: string;
+  supplierLogoUrl: string | null;
   price: number;
   currency: Currency;
   priceBasis: string;
   quantity: number;
+  /* Минимальная партия: ниже неё количество не опускаем. */
+  moq: number;
+  photoUrl: string | null;
+}
+
+/* Статусы заявки из макета «Мои заявки». */
+export type RequestStatus =
+  "sent" | "viewed" | "discussion" | "confirmed" | "rejected";
+
+export type ContactMethod = "phone" | "whatsapp" | "telegram" | "max" | "email";
+
+export type EntityType = "legal" | "individual";
+
+export interface RequestContact {
+  fullName: string;
+  company: string;
+  phone: string;
+  email: string;
+  inn: string;
+  /* Дата в формате YYYY-MM-DD. */
+  neededBy: string;
+  address: string;
+  contactMethods: ContactMethod[];
+  entityType: EntityType;
+  comment: string;
+}
+
+/* Отправленная заявка. POST-эндпоинта нет, поэтому живёт в localStorage. */
+export interface SubmittedRequest {
+  id: string;
+  /* Сквозной номер, его видит пользователь. */
+  number: number;
+  createdAt: string;
+  supplierId: number;
+  supplierName: string;
+  supplierLogoUrl: string | null;
+  items: RequestItem[];
+  /* Сумма позиций с известной ценой. */
+  preliminaryTotal: number;
+  currency: Currency;
+  contact: RequestContact;
+  status: RequestStatus;
+}
+
+/* Заготовка заявки: номер, дату и статус проставляет хранилище. */
+export interface RequestDraft {
+  supplierId: number;
+  supplierName: string;
+  supplierLogoUrl: string | null;
+  items: RequestItem[];
+  contact: RequestContact;
 }
 
 export interface SupplierFinderSelection {
