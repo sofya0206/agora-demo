@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
 import { getCategories, getSuppliers } from "@/lib/api";
 import { PILOT_CATEGORIES } from "@/lib/catalog";
 import type { Category, Supplier } from "@/types";
@@ -61,9 +62,13 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   return (
     <div className="mx-auto w-full max-w-[1440px] px-5 pb-20 sm:px-8 xl:px-20">
       <section className="flex flex-col gap-4 py-4">
-        <p className="text-lg font-medium text-muted-foreground">
-          Каталог предложений
-        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="text-lg font-medium text-muted-foreground">
+            Каталог предложений
+          </p>
+          {/* Заявка уходит одному поставщику — предупреждаем до того, как её наберут. */}
+          <Badge variant="secondary">Одна заявка — один поставщик</Badge>
+        </div>
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-medium tracking-[-0.04em] text-foreground sm:text-[26px]">
             Сравнивайте упаковку по цене и условиям поставки

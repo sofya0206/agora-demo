@@ -3,9 +3,14 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+/* В макете тема переключается сегментированной парой кнопок, а не одной. */
+export function ThemeToggle({ className }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,15 +22,40 @@ export function ThemeToggle() {
   const isDark = mounted && resolvedTheme === "dark";
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      className="rounded-[10px]"
-      aria-label={isDark ? "Включить светлую тему" : "Включить тёмную тему"}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+    <div
+      className={cn(
+        "inline-flex items-center gap-0 rounded-lg bg-muted p-0.5",
+        className,
+      )}
+      role="group"
+      aria-label="Тема оформления"
     >
-      {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-    </Button>
+      <button
+        type="button"
+        aria-label="Светлая тема"
+        aria-pressed={mounted ? !isDark : undefined}
+        onClick={() => setTheme("light")}
+        className={cn(
+          "inline-flex h-7 w-9 items-center justify-center rounded-md text-foreground transition-colors",
+          mounted && !isDark
+            ? "bg-background shadow-xs"
+            : "hover:bg-background/50",
+        )}
+      >
+        <Sun className="size-4" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        aria-label="Тёмная тема"
+        aria-pressed={mounted ? isDark : undefined}
+        onClick={() => setTheme("dark")}
+        className={cn(
+          "inline-flex h-7 w-9 items-center justify-center rounded-md text-foreground transition-colors",
+          isDark ? "bg-background shadow-xs" : "hover:bg-background/50",
+        )}
+      >
+        <Moon className="size-4" aria-hidden="true" />
+      </button>
+    </div>
   );
 }

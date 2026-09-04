@@ -13,10 +13,26 @@ function itemFromOffer(offer: Offer): RequestItem {
     title: offer.offer_title,
     supplierId: offer.supplier.id,
     supplierName: offer.supplier.commercial_name,
+    supplierLogoUrl: offer.supplier.logo_url,
     price: offer.price_value,
     currency: offer.currency,
     priceBasis: offer.price_basis,
     quantity: offer.moq_value,
+    moq: offer.moq_value,
+    photoUrl: offer.photo_url,
+  };
+}
+
+/* Заявки, сохранённые до появления MOQ и фото, дополняем на чтении. */
+function normalize(item: RequestItem): RequestItem {
+  const moq = Number.isFinite(item.moq) && item.moq > 0 ? item.moq : 1;
+
+  return {
+    ...item,
+    moq,
+    supplierLogoUrl: item.supplierLogoUrl ?? null,
+    photoUrl: item.photoUrl ?? null,
+    quantity: Math.max(moq, item.quantity || moq),
   };
 }
 
@@ -41,13 +57,18 @@ function subscribe(listener: () => void) {
   };
 }
 
-function readItems(): RequestItem[] {
+function parse(snapshot: string): RequestItem[] {
   try {
-    return JSON.parse(getSnapshot()) as RequestItem[];
+    const parsed = JSON.parse(snapshot) as RequestItem[];
+    return Array.isArray(parsed) ? parsed.map(normalize) : [];
   } catch {
     // Повреждённую заявку начинаем заново.
     return [];
   }
+}
+
+function readItems(): RequestItem[] {
+  return parse(getSnapshot());
 }
 
 function save(items: RequestItem[]) {
@@ -65,13 +86,7 @@ export function useRequest() {
     getSnapshot,
     () => EMPTY_SNAPSHOT,
   );
-  const items = useMemo(() => {
-    try {
-      return JSON.parse(snapshot) as RequestItem[];
-    } catch {
-      return [];
-    }
-  }, [snapshot]);
+  const items = useMemo(() => parse(snapshot), [snapshot]);
   const ids = useMemo(
     () => new Set(items.map((item) => item.offerId)),
     [items],
@@ -98,7 +113,7 @@ export function useRequest() {
     save(
       current.map((item) =>
         item.offerId === offerId
-          ? { ...item, quantity: Math.max(1, quantity) }
+          ? { ...item, quantity: Math.max(item.moq, quantity) }
           : item,
       ),
     );
@@ -108,5 +123,10 @@ export function useRequest() {
     save(readItems().filter((item) => item.offerId !== offerId));
   }, []);
 
-  return { items, ids, toggle, add, setQuantity, remove };
+  /* После отправки заявки черновик очищаем целиком. */
+  const clear = useCallback(() => {
+    save([]);
+  }, []);
+
+  return { items, ids, toggle, add, setQuantity, remove, clear };
 }
