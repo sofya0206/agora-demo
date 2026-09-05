@@ -43,26 +43,27 @@ const offers = [
 
 export function HomeAiMatch() {
   return (
-    <HomeSection tone="soft" className="flex flex-col gap-12">
+    <HomeSection tone="soft" className="flex flex-col gap-10">
       <HomeHeading
         eyebrow="03 / AI-подбор"
         lines={["Подбор начинается", "с обычного диалога"]}
         lead="Опишите задачу своими словами. AI удерживает контекст, уточняет требования и сразу показывает, почему конкретная позиция подходит или не подходит."
+        aside={
+          <ul className="flex flex-col gap-3">
+            {abilities.map((ability) => (
+              <li
+                key={ability}
+                className="flex items-center gap-2 text-xs text-home-muted"
+              >
+                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-home-accent-soft text-home-accent">
+                  <Check className="size-3" aria-hidden="true" />
+                </span>
+                {ability}
+              </li>
+            ))}
+          </ul>
+        }
       />
-
-      <ul className="flex flex-col gap-3 lg:-mt-6 lg:ml-auto lg:w-[380px]">
-        {abilities.map((ability) => (
-          <li
-            key={ability}
-            className="flex items-center gap-2 text-xs text-home-muted"
-          >
-            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-home-accent-soft text-home-accent">
-              <Check className="size-3" aria-hidden="true" />
-            </span>
-            {ability}
-          </li>
-        ))}
-      </ul>
 
       <div className="grid overflow-hidden rounded-2xl border border-home-line bg-home-card lg:grid-cols-2">
         <div className="flex flex-col gap-4 border-home-line p-5 lg:border-r">

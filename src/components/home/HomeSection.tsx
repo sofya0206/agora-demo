@@ -38,6 +38,8 @@ interface HomeHeadingProps {
   /* Строки заголовка; последняя набрана акцентом. */
   lines: string[];
   lead?: string;
+  /* Дополнение под абзацем в правой колонке, например список с галочками. */
+  aside?: React.ReactNode;
   tone?: Tone;
   align?: "start" | "center";
   className?: string;
@@ -47,6 +49,7 @@ export function HomeHeading({
   eyebrow,
   lines,
   lead,
+  aside,
   tone = "light",
   align = "start",
   className,
@@ -60,7 +63,9 @@ export function HomeHeading({
         "flex flex-col gap-6",
         centered
           ? "items-center text-center"
-          : "lg:flex-row lg:items-end lg:justify-between",
+          : "lg:flex-row lg:justify-between",
+        /* Абзац стоит по низу заголовка; если под ним есть ещё список, колонки ровняем по верху. */
+        !centered && (aside ? "lg:items-start" : "lg:items-end"),
         className,
       )}
     >
@@ -91,16 +96,27 @@ export function HomeHeading({
         </h2>
       </div>
 
-      {lead && (
-        <p
+      {(lead || aside) && (
+        <div
           className={cn(
-            "text-sm leading-6",
+            "flex flex-col gap-5",
             centered ? "max-w-[640px]" : "lg:max-w-[380px]",
-            onPanel ? "text-home-panel-muted" : "text-home-muted",
+            /* При выравнивании по верху абзац начинается на уровне заголовка, не надзаголовка. */
+            !centered && aside && "lg:pt-8",
           )}
         >
-          {lead}
-        </p>
+          {lead && (
+            <p
+              className={cn(
+                "text-sm leading-6",
+                onPanel ? "text-home-panel-muted" : "text-home-muted",
+              )}
+            >
+              {lead}
+            </p>
+          )}
+          {aside}
+        </div>
       )}
     </div>
   );
