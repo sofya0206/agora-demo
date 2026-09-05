@@ -6,7 +6,10 @@ const audience = ["К", "М", "О"];
 
 export function HomeHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-home-bg text-home-text">
+    <section
+      data-home-snap
+      className="relative w-full snap-start overflow-hidden bg-home-bg text-home-text"
+    >
       <Image
         src="/home/hero-boxes.png"
         alt=""
@@ -17,7 +20,7 @@ export function HomeHero() {
         className="pointer-events-none absolute inset-0 size-full object-cover"
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 px-5 py-24 text-center sm:px-8 sm:py-40">
+      <div className="relative mx-auto flex min-h-[calc(100svh-90px)] w-full max-w-[1200px] flex-col items-center justify-center gap-6 px-5 py-24 text-center sm:px-8">
         <span className="inline-flex items-center gap-2 rounded-full bg-home-card px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-home-text uppercase shadow-xs">
           <span
             className="size-1.5 rounded-full bg-home-accent"

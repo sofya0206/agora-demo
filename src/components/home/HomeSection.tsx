@@ -22,10 +22,10 @@ export function HomeSection({
   children,
 }: HomeSectionProps) {
   return (
-    <section className={cn("w-full", toneClass[tone])}>
+    <section className={cn("w-full snap-start", toneClass[tone])}>
       <div
         className={cn(
-          "mx-auto w-full max-w-[1200px] px-5 py-20 sm:px-8 sm:py-26",
+          "mx-auto flex w-full min-h-[calc(100svh-90px)] max-w-[1200px] flex-col justify-center px-5 py-20 sm:px-8 sm:py-26",
           className,
         )}
       >

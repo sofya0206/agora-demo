@@ -74,6 +74,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Лендинг листается посекционно: мягкий магнит, чтобы секция вставала под шапку.
+   Правило включается только там, где есть маркер, — остальные страницы скроллятся обычно. */
+html:has([data-home-snap]) {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 90px;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
