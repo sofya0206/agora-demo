@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "outDir": ".next/test-dist"
+  },
+  "include": [
+    "tests/**/*.ts",
+    "src/app/my-requests/components/request-data.ts",
+    "src/app/my-requests/components/request-status.ts",
+    "src/app/my-requests/components/request-url.ts",
+    "src/types/index.ts"
+  ]
+}
