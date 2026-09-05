@@ -8,7 +8,7 @@ export function HomeHero() {
   return (
     <section
       data-home-snap
-      className="relative w-full snap-start overflow-hidden bg-home-bg text-home-text"
+      className="relative w-full snap-start scroll-mt-[90px] overflow-hidden bg-home-bg text-home-text"
     >
       <Image
         src="/home/hero-boxes.png"

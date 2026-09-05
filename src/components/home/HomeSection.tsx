@@ -24,7 +24,9 @@ export function HomeSection({
   children,
 }: HomeSectionProps) {
   return (
-    <section className={cn("w-full snap-start", toneClass[tone])}>
+    <section
+      className={cn("w-full snap-start scroll-mt-[90px]", toneClass[tone])}
+    >
       <div className="mx-auto flex min-h-[calc(100svh-90px)] w-full max-w-[1200px] items-center px-5 py-20 sm:px-8 sm:py-26">
         <div className={cn("w-full", className)}>{children}</div>
       </div>

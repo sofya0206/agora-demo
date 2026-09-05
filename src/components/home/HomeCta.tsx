@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export function HomeCta() {
   return (
-    <section className="w-full snap-start bg-home-panel">
+    <section className="w-full snap-start scroll-mt-[90px] bg-home-panel">
       <div className="mx-auto flex w-full min-h-[calc(100svh-90px)] max-w-[1200px] flex-col justify-center px-5 py-20 sm:px-8">
         <div className="relative overflow-hidden rounded-2xl border border-home-panel-line px-6 py-16 text-center">
           <span
