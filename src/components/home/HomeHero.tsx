@@ -1,47 +1,70 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { HomeEyebrow } from "./HomeEyebrow";
+import { ArrowRight } from "lucide-react";
 
-const HIGHLIGHTS = ["Быстро", "Бесплатно", "И много коробочек"];
+const audience = ["К", "М", "О"];
 
 export function HomeHero() {
   return (
-    <section className="flex min-h-[calc(100svh-73px)] flex-col items-center justify-center py-20 text-center">
-      <HomeEyebrow>Поиск на основе ИИ</HomeEyebrow>
+    <section
+      data-home-snap
+      className="relative w-full snap-start scroll-mt-[90px] overflow-hidden bg-home-bg text-home-text"
+    >
+      <Image
+        src="/home/hero-boxes.png"
+        alt=""
+        aria-hidden="true"
+        width={1536}
+        height={1024}
+        priority
+        className="pointer-events-none absolute inset-0 size-full object-cover"
+      />
 
-      <h1 className="mt-5 max-w-[900px] text-4xl font-extrabold tracking-[-0.033em] text-foreground sm:text-5xl lg:text-[60px] lg:leading-[1.04]">
-        Ваши коробочки уже ждут вас
-      </h1>
+      <div className="relative mx-auto flex min-h-[calc(100svh-90px)] w-full max-w-[1200px] flex-col items-center justify-center gap-6 px-5 py-24 text-center sm:px-8">
+        <span className="inline-flex items-center gap-2 rounded-full bg-home-card px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-home-text uppercase shadow-xs">
+          <span
+            className="size-1.5 rounded-full bg-home-accent"
+            aria-hidden="true"
+          />
+          B2B-платформа закупки упаковки
+        </span>
 
-      <p className="mt-[22px] mb-8 max-w-[520px] text-lg leading-5 text-muted-foreground lg:text-[19px]">
-        B2B-сервис, соединяющий вас с проверенными производителями транспортной
-        упаковки.
-      </p>
+        <h1 className="text-4xl font-bold tracking-[-0.03em] sm:text-[56px] sm:leading-[1.1]">
+          <span className="block">Поставщик упаковки.</span>
+          <span className="block text-home-accent">Точно под задачу.</span>
+        </h1>
 
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <Button asChild className="h-10 gap-2 px-6">
-          <Link href="/catalog">
-            Начать поиск
-            <ArrowRight className="size-[17px]" aria-hidden="true" />
-          </Link>
-        </Button>
-        <Button asChild variant="outline" className="h-10 px-6">
-          <Link href="/find-supplier">Найти поставщика</Link>
-        </Button>
+        <p className="max-w-[620px] text-sm leading-6 text-home-muted">
+          Агора помогает бизнесу находить поставщиков транспортной и
+          промышленной упаковки по понятным условиям — без десятков звонков и
+          запросов «в пустоту».
+        </p>
+
+        <Link
+          href="/find-supplier"
+          className="mt-2 inline-flex h-11 items-center gap-2 rounded-lg bg-home-accent-fill px-6 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        >
+          Подобрать поставщика
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+
+        <div className="mt-2 flex items-center gap-3">
+          <span className="flex -space-x-2" aria-hidden="true">
+            {audience.map((letter) => (
+              <span
+                key={letter}
+                className="flex size-8 items-center justify-center rounded-full border border-home-line bg-home-card text-xs font-semibold text-home-muted"
+              >
+                {letter}
+              </span>
+            ))}
+          </span>
+          <p className="text-left text-xs leading-4 text-home-muted">
+            Для e-commerce, магазинов
+            <br />и оптовых покупателей
+          </p>
+        </div>
       </div>
-
-      <ul className="mt-[34px] flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-        {HIGHLIGHTS.map((item) => (
-          <li
-            key={item}
-            className="flex items-center gap-2 text-sm font-medium text-muted-foreground"
-          >
-            <Check className="size-[17px] text-foreground" aria-hidden="true" />
-            {item}
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

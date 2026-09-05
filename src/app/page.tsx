@@ -1,24 +1,32 @@
 import type { Metadata } from "next";
+import { HomeAiMatch } from "@/components/home/HomeAiMatch";
+import { HomeBuyer } from "@/components/home/HomeBuyer";
 import { HomeCta } from "@/components/home/HomeCta";
-import { HomeFeatures } from "@/components/home/HomeFeatures";
-import { HomeFinder } from "@/components/home/HomeFinder";
+import { HomeFaq } from "@/components/home/HomeFaq";
 import { HomeHero } from "@/components/home/HomeHero";
-import { HomeStats } from "@/components/home/HomeStats";
+import { HomeProblem } from "@/components/home/HomeProblem";
+import { HomeRoadmap } from "@/components/home/HomeRoadmap";
+import { HomeSolution } from "@/components/home/HomeSolution";
+import { HomeSupplier } from "@/components/home/HomeSupplier";
 
 export const metadata: Metadata = {
-  title: "Агора — B2B-платформа упаковки",
+  title: "Агора — поставщики упаковки под вашу задачу",
   description:
-    "Найдите поставщиков транспортной упаковки: подбор по ассортименту, единая заявка и ответы за часы.",
+    "Агора помогает бизнесу находить поставщиков транспортной и промышленной упаковки по понятным условиям: AI-подбор, сравнение условий и единая заявка.",
 };
 
 export default function HomePage() {
   return (
-    <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-7">
+    <>
       <HomeHero />
-      <HomeFinder />
-      <HomeStats />
-      <HomeFeatures />
+      <HomeProblem />
+      <HomeSolution />
+      <HomeAiMatch />
+      <HomeBuyer />
+      <HomeSupplier />
+      <HomeRoadmap />
+      <HomeFaq />
       <HomeCta />
-    </div>
+    </>
   );
 }
