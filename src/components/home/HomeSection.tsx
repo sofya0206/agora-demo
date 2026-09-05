@@ -15,7 +15,9 @@ interface HomeSectionProps {
   children: React.ReactNode;
 }
 
-/* Секции лендинга идут во всю ширину, содержимое держим на сетке 1200. */
+/* Секции лендинга идут во всю ширину, содержимое держим на сетке 1200.
+   Каждая секция занимает экран под шапкой, содержимое стоит по центру —
+   внешняя обёртка центрирует, а раскладку задаёт внутренняя. */
 export function HomeSection({
   tone = "light",
   className,
@@ -23,13 +25,8 @@ export function HomeSection({
 }: HomeSectionProps) {
   return (
     <section className={cn("w-full snap-start", toneClass[tone])}>
-      <div
-        className={cn(
-          "mx-auto flex w-full min-h-[calc(100svh-90px)] max-w-[1200px] flex-col justify-center px-5 py-20 sm:px-8 sm:py-26",
-          className,
-        )}
-      >
-        {children}
+      <div className="mx-auto flex min-h-[calc(100svh-90px)] w-full max-w-[1200px] items-center px-5 py-20 sm:px-8 sm:py-26">
+        <div className={cn("w-full", className)}>{children}</div>
       </div>
     </section>
   );
